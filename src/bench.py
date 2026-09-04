@@ -31,6 +31,7 @@ def main() -> None:
     prompt = params["bench"]["prompt"]
     set_seed(params["generate"]["seed"])
 
+    # Время загрузки считается отдельно
     t0 = time.perf_counter()
     tokenizer, model = load_model(params)
     load_time = time.perf_counter() - t0
@@ -40,6 +41,7 @@ def main() -> None:
         generate(tokenizer, model, params, prompt)
 
     speeds = []
+    # Время генерации каждый раз считается относительно начала генерации
     for _ in range(params["bench"]["measure_runs"]):
         t1 = time.perf_counter()
         _, n_tokens = generate(tokenizer, model, params, prompt)

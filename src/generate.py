@@ -6,6 +6,8 @@ from src.model import generate, load_model, set_seed
 
 def main() -> None:
     params = load_params()
+
+    # Устанавливаем seed
     set_seed(params["generate"]["seed"])
 
     tokenizer, model = load_model(params)
